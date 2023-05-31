@@ -14,15 +14,13 @@ subtitle: Writing your first Go app with ChatGPT
 title: How I Learned to Stop Worrying and Love LLMs
 ---
 
-In the sea of AI, there's a new threat on the horizon: Large Language Models (LLMs) and products built upon them, like ChatGPT and GitHub Copilot. Are they a tsunami about to swipe us away or a giant wave we must learn to ride?
+<p style="font-size: 1.2em">In the sea of AI, there's a new threat on the horizon: Large Language Models (LLMs) and products built upon them, like ChatGPT and GitHub Copilot. Are they a tsunami about to swipe us away or a giant wave we must learn to ride?</p>
 
-### Summary
+<p style="font-size: 1.1em; font-style: italic;">To investigate, I started with a concrete itch I had to scratch: sending a reminder to inform our customers, in bulk, by SMS. With ChatGPT, I created an application in a new programming language, Go, in minutes instead of days. I'll walk through how I did that and what it was like, and I'll close by reflecting on how, for programmers trapped doing the same things repeatedly, with minimal variations, LLMs might turn into a frightening tsunami. However, for the dexterous kind, LLMs are an incredible wave to ride: you surf higher and faster if you know your moves, and that's a lot of fun.</p>
 
-To investigate, I started with a concrete itch I had to scratch: sending a reminder to inform our customers, in bulk, by SMS. With ChatGPT, I created an application in a new programming language, Go, in minutes instead of days. I'll walk through how I did that and what it was like, and I'll close by reflecting on how, for programmers trapped doing the same things repeatedly, with minimal variations, LLMs might turn into a frightening tsunami. However, for experienced programmers, LLMs are an incredible wave to ride: you go higher and faster if you know your moves, and that's a lot of fun. 
+Since the launch of GitHub Copilot and ChatGPT, some people have been saying programmers will disappear as we know them today. In contrast, others said that programmers will be fine as long as the tools just spit out a statistically probable answer without understanding what you ask. Nowadays, I don't code much, making it hard to form an opinion based on first-hand experience.
 
-Since the launch of GitHub Copilot and ChatGPT, some people have been saying programmers will disappear as we know them today. In contrast, others said that programmers will be fine as long as the tools just spit out a statistically probably answer without understanding what you ask. Nowadays, I don't code much, making it hard to have an opinion based on first-hand experience.
-
-This changed last week. Some customers asked us to be reminded of an upcoming training and we wanted to send an SMS instead of an email. As we didn't have any system in place for this, a colleague asked me what to do. I knew was about messaging platforms providing APIs to send SMS, so I told him I would build one for him. Selecting a platform was easy: I know MessageBird offers this service, is close to our Amsterdam office, and they are currently facing [headwinds]. That's the equivalent of a farmers market for an API, I thought, so I created an account.
+This changed last week. Some customers asked us to be reminded of an upcoming training and we wanted to send an SMS instead of an email. As we didn't have any system in place for this, a colleague asked me for advice. I knew that messaging platforms provide APIs to send SMS, so I told him I would build a tool for the task. Selecting a platform was easy: I know MessageBird offers this service, is close to our Amsterdam office, and they are currently facing [headwinds]. That's the equivalent of a farmers market for an API, I thought, so I created an account.
 
 MessageBird offers Python bindings to send SMSs with a simple API:
 
@@ -37,11 +35,11 @@ message = client.message_create(
 
 Coding an app around it should be quick, as I'm still well versed in Python.
 
-But then it dawned on me: the next time a colleague needs to send SMS in bulk, I'll have to do it for them as getting a working Python environment is hard if you're not technical. What could I do to avoid being a bottleneck? Go, a language designed at Google, allows running code without installing anything on anyone's computer, Mac, Windows, or Linux. And MessageBird provides a Go API! The only issue: I've never programmed in Go!
+But then it dawned on me: the next time a colleague needs to send SMS in bulk, I'll have to do it for them as getting a working Python environment is hard if you're not technical. What could I do to avoid being a bottleneck? Go, a language designed at Google, would have been an option, as it allows running code without installing anything on anyone's computer, Mac, Windows, or Linux. And MessageBird provides a Go API! The only issue: I've never programmed in Go and my calendar doesn't have that many openings!
 
 ### AI-enhanced development
 
-However, I read a [post] from the co-founder of Django on how he became more ambitious with his projects thanks to AI-enhanced development. I had to try, so I started with MessageBird Go API documentation:
+However, I read a [post] from the co-founder of Django on how he became more ambitious with his projects thanks to AI-enhanced development. I had to try, so I started with the MessageBird Go API documentation:
 
 ```golang
 client := messagebird.New("YOUR_ACCESS_KEY")
@@ -57,22 +55,46 @@ The code is similar to the Python's snippet, with some puzzling syntax such as `
 
 ### Human-crafted architecture
 
-First of all, how should the program be structured? I didn't bother asking ChatGPT, as just explaining what I had in mind was probably longer than just doing it (this is an area where humans are maybe still ahead [add relevant Twitter]). First, I need to create the `client` and pass it the access key. Then I need to read the csv file with the records, split the record by name and phone number, and, for each record, send an SMS. I also thought that customizing the message using the first name was a nice touch.
+First of all, how should the program be structured? I didn't bother asking ChatGPT, as just explaining the requirements was probably longer than just doing it. 
 
-| name   | phone |
-|--------|-------|
-| John   | 12345 |
-| Mary   | 54321 |
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">To replace programmers with AI, clients will need to accurately describe what they want.<br><br>We’re safe.<a href="https://twitter.com/hashtag/softwareengineering?src=hash&amp;ref_src=twsrc%5Etfw">#softwareengineering</a> <a href="https://twitter.com/hashtag/programming?src=hash&amp;ref_src=twsrc%5Etfw">#programming</a></p>&mdash; Dr. Milan Milanović (@milan_milanovic) <a href="https://twitter.com/milan_milanovic/status/1622127889108926466?ref_src=twsrc%5Etfw">February 5, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-The access key, though, it's a secret, so I don't want to write it directly in the code. How should I approach it?
 
-### AI-enhanced coding
+To start, I assume my data will look like table 1 (but without headers) and will be stored in a csv file.
+
+<table style="border-collapse: collapse; width: 50%;">  
+<caption style="font-size: 1.1em;">Table 1: The csv file containing the name and phone number of our customers</caption>
+  <thead>  
+    <tr>  
+      <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">name</th>  
+      <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">phone</th>  
+    </tr>  
+  </thead>  
+  <tbody>  
+    <tr>  
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">John</td>  
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">12345</td>  
+    </tr>  
+    <tr>  
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Mary</td>  
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">54321</td>  
+    </tr>  
+  </tbody>  
+</table>
+
+Afterward, I need to create the MessageBird `client` and pass it the access key, as the documentation showed. Then, I should read the csv file with the records, split each record by name and phone number, and, for each record, send an SMS. I can use the name of our customer to customize the message to make it feel personal.
+
+The access key, though, it's a secret, and shouldn't be in the code I write. How should I approach it in Go?
+
+### Bringing ChatGPT for a spin
+
+Time to try out our new AI overlord:
 
 > Q: What's the proper way to pass secrets to a Golang program?
 
-> A: Using environment variables is The proper way to pass secrets, such as API keys or sensitive configuration data, to a Golang program. 
+> A: Using environment variables is the proper way to pass secrets, such as API keys or sensitive configuration data, to a Golang program. 
 
-The code suggestion from ChatGPT is:
+The code suggested:
 
 ```golang
 // GENERATED BY CHATGPT, EXCLUDING THIS COMMENT
@@ -141,7 +163,7 @@ That's great, but I need to access individual fields in the record.
 
 > Q: How do I split a record, coming out of reader.Read() in go, so that I can do something with each field?
 
-A long answer came out, with the proper answer buried in the code but not exactly what I asked
+A long answer came out, with the proper answer buried in the code but not exactly what I asked. Also note that I can use *golang*, *go*, or *Go* interchangeably. The AI knows.
 
 > A: When you read a record using reader.Read() from the encoding/csv package in Go, it returns a slice of strings
 > 
@@ -173,7 +195,7 @@ func add(a int, b int) int {
 }
 ```
 
-OK, it seems easy. Now my turn to code and write it
+OK, it seems easy. Now my turn to code:
 
 ```golang
 func sendMessage(client, text str, sender str, recipient str, name str) {
@@ -190,14 +212,16 @@ func sendMessage(client, text str, sender str, recipient str, name str) {
 }
 ```
 
-OK, almost there. This code has one bug and one problem:
+OK, almost there. This code has two problems:
 
-1. Bug: `client` has no type in the function signature
+1. `client` has no type in the function signature and Go doesn't like that!
 2. I want to interpolate the `name` variable into the `text` variable to personalize the message
+
+### The finishing touches
 
 > Q: How do I find out the type of a go variable?
 
-ChatGPT replied: `fmt.Printf("Type of var1 (%v) is: %T\n", var1, var1)`. Upon running the snippet, I got `*messagebird.Client`. Later, after I set up [NeoVim] with the Go Language Server protocol ([LSP]), the editor would suggest that `client` is indeed of `*messagebird.Client` type while instantiating it. This is much more convenient than running programs just to get the type of variables.
+ChatGPT replied: `fmt.Printf("Type of var1 (%v) is: %T\n", var1, var1)`. Upon running the snippet, I got `*messagebird.Client`, which is what the doctor ordered. Later, after I set up [NeoVim] with the Go Language Server protocol ([LSP]), the editor would conveniently suggest the type automatically.
 
 > Q: How do I do string interpolation in go?
 
@@ -283,7 +307,7 @@ This is all there is to it. Time to run it?
 
 > A: `go run main.go`
 
-Well, that didn't work. My console complained about a missing `go.mod` file.
+Well, that didn't work ChatGPT. My console complained about a missing `go.mod` file.
 
 > Q: How to I create the go.mod file in a go project?
 
@@ -298,11 +322,11 @@ Having a working project is terrific because I can start adding new functionalit
 
 ### Looking forward
 
-The speed at which I could get working code in a new language was astonishing, and I think this will have two main consequences. First, if all your coding is small repetitive pieces—rewriting a SQL script from one SQL dialect to another, documentation, creating simple APIs on top of databases—learn to master LLMs prompting, or someone else will take your place. There is simply no way ChatGPT, or an LLM fine-tuned to this task, can't figure out what you're doing with minimal oversight. Second, if you're a seasoned programmer starting in a new area, LLMs are fun. You can do high-level thinking, let LLMs handle time-consuming, simple problems, check their output— as, at the moment, they do not **understand** what you're telling them— and then assemble the pieces.
+The speed at which I could get working code in a new language was astonishing, and I think this will have two main consequences. First, if all your coding is small repetitive pieces—rewriting a SQL script from one SQL dialect to another, documentation, creating simple APIs on top of databases—learn to master LLMs prompting, or someone else will take your place. There is simply no way ChatGPT, or an LLM fine-tuned to this task, can't figure out what you're doing with minimal oversight. Second, deft programmers starting or experimenting in a new area will have fun. You can do the high-level thinking, let LLMs handle time-consuming, simple problems, check their output— as, at the moment, they do not **understand** what you're telling them— and then assemble the pieces.
 
 SHOULD I WRITE THIS? You might ask why I split programmers into two groups. FILL IN.
 
-If you're looking for help to get started, we just launched a training [program] to help you leverage LLMs to be more effective while coding. I'll be there too, so I can learn from the best what I'm still missing to ride this wave even higher and faster.
+If you're looking for a kickstart, we just launched a training [program] to help you leverage LLMs to be more effective while coding. I'll be there too, so I can learn from the best what I'm still missing to ride this wave even higher and faster.
 
 
 
