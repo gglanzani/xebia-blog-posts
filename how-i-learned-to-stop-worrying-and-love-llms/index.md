@@ -1,7 +1,7 @@
 ---
 author: Giovanni Lanzani
 brand: xebia.com
-date: 2023-06-06 00:00:00+02:00
+date: 2023-06-01 16:20:00+02:00
 email: giovanni.lanzani@xebia.com
 focus-keywords: llms chatgpt llm copilot go messagebird
 guid: https://xebia.com/wp-json/wp/v2/posts/64979
@@ -13,7 +13,7 @@ categories:
 og:
   image: images/og-banner.jpg
 slug: how-i-learned-to-stop-worrying-and-love-llms
-status: draft
+status: publish
 subtitle: Writing your first Go app with ChatGPT
 title: How I Learned to Stop Worrying and Love LLMs
 ---
@@ -328,8 +328,29 @@ Having a working project is terrific because I can start adding new functionalit
 
 The speed at which I could get working code in a new language was astonishing, and I think this will have two main consequences. First, if all your coding is made of small repetitive pieces—rewriting a SQL script from one SQL dialect to another, documentation, creating simple APIs on top of databases—learn to master LLMs prompting, or someone else will take your place. There is simply no way ChatGPT, or an LLM fine-tuned to this task can't figure out what you're doing with minimal oversight. Second, deft programmers starting or experimenting in a new area will have fun. You can do the high-level thinking, let LLMs handle time-consuming, simple problems, check their output— as, at the moment, they do not **understand** what you're telling them— and then assemble the pieces.
 
-If you're looking for a kickstart, we just launched a training [program] to help you leverage LLMs to be more effective while coding. I'll be there too, so I can learn from the best how to ride this wave even higher and faster.
 
+<br/>
+<br/>
+
+<section class="w-full has-list-check pb-sm bg-grey-100 pb-sm relative px-2 md:px-0">
+    
+        <div class="cta-wave-top w-full relative -mt-md -mb-md data-appear">
+            <img class="w-full" src="https://xebia.com/wp-content/themes/xebia-theme/images/cta-wave.svg" alt="">
+        </div>
+    <!-- 1 text + img -->
+        <div class="container relative z-20 md:flex pb-sm ">
+            <div class="data-appear-group w-full md:w-2/3 pr-sm">
+                <h2 class="mt-0 text-2xl md:text-3xl pb-0 text-purple"> <div id="hs_cos_wrapper_widget_1683625652060_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_inline_text" data-hs-cos-general-type="widget" data-hs-cos-type="inline_text" data-hs-cos-field="section_title">Copilot Training</div></h2>
+                <div class="text-base md:text-xl"> <div id="hs_cos_wrapper_widget_1683625652060_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_inline_rich_text" data-hs-cos-general-type="widget" data-hs-cos-type="inline_rich_text" data-hs-cos-field="section_text"><span>If you're looking for help to get started, we just launched a training program to help you leverage LLMs to be more effective while coding. I'll be there too, so I can learn from the best what I'm still missing to ride this wave even higher and faster.</span></div> </div>               
+            </div>
+            <div class="md:px-md md:pt-sm w-full md:w-1/3">
+                <div class="pb-sm"><a href="https://xebia.com/academy/en/training/copilot" class="btn-outline">More info</a></div>
+            </div>
+        </div>
+        <div class="cta-wave-bottom w-full absolute bottom-0 data-appear">
+            <img src="https://xebia.com/wp-content/themes/xebia-theme/images/cta-wave-bottom.svg" alt="">
+        </div>
+</section>
 
 
 [post]: https://simonwillison.net/2023/Mar/27/ai-enhanced-development/
