@@ -17,60 +17,64 @@ subtitle: Testing AI systems is more necessary than ever. So why are few doing i
   right?
 title: 'Through the Looking Glass: Exploring the Wonderland of Testing AI Systems'
 ---
-
-<p style="font-size: 1.2em">
-Artificial Intelligence (AI) systems are becoming ubiquitous: from cars to risk
-models to large language models (LLMs). As we depend more on these systems,
-testing should be a top priority during deployment.
+<p style="font-size: 1.2em"> 
+Artificial Intelligence (AI) systems are becoming
+ubiquitous: from self-driving cars to risk assessments to large language
+models (LLMs). As we depend more on these systems, testing should be a top
+priority during deployment. 
 </p>
 
-<div style="font-size: 1.1em; font-style: italic;"> 
+<p style="font-size: 1.1em; font-style: italic;"> 
 Leaving software untested is like writing a cheque without verifying the amount
-or recipient; you can do it right the first time, but you'd rather be sure to
-avoid nasty surprises or even catastrophic results. Take, for example, the code
-bug that bankrupted Knight Capital Group's by losing USD 460M in less than an
-hour. AI systems are even more vulnerable as, besides code, they leverage data
-and algorithms, and you need to test them all to avoid whammies.
+or recipient; you can do it right the first time, but you'd rather check twice
+to avoid nasty surprises or even catastrophic results. Take, for example, the
+code bug that bankrupted Knight Capital Group by making them lose USD 460M in
+less than an hour. AI systems are even more vulnerable as, besides code, they
+leverage data and algorithms, so you need to test all the components to avoid
+whammies. 
+</p>
 
-However, AI is the domain of data scientists who are not renowned for their
+<p style="font-size: 1.1em; font-style: italic;"> 
+However, AI is the domain of data scientists, who are not renowned for their
 test-writing abilities—boring details compared to science. They should be
-helped to do so in multidisciplinary teams, as these systems are built and
+helped to test in multidisciplinary teams, as these systems are built and
 maintained across departments.
+</p>
 
+<p style="font-size: 1.1em; font-style: italic;"> 
 To avoid slowdowns, testers need end-to-end ownership, focusing on where the
 business need and risk is more acute. This approach ensures precious buy-in.
 This article explains where to start and what is required to avoid overdosing
 on chamomile to sleep at night. 
-</div>
-
+</p>
 </br>
 
 Artificial Intelligence (AI) and Machine Learning (ML) systems are becoming
-ubiquitous: from self-driving cars to risk models to large language models
+ubiquitous: from self-driving cars to risk assessments to large language models
 (LLMs). As we grow more dependent on these systems, testing should be a top
 priority for organizations and governments using them. Leaving them unchecked
 is akin to writing a cheque without validating the amount or recipient.
 Checking can be annoying, but making a mistake can be fatal.
 
-Dutch parents with dual nationality know this well. Such a system trained
+Dutch parents with dual nationality know this well. An AI system trained
 by the government to spot childcare benefits fraud ended up
 discriminating against this parental group. The outcome for the families
 discriminated against was tragic. Some had to sell their homes and
 belongings. The Dutch cabinet ended up stepping down amidst the fallout.
 
-## Tests avoid surprises
+## Tests prevent surprises
 
 To avoid surprises, AI systems should be tested by feeding them real-world-like
 data. 
 
 When a new system version is ready, the tests ensure it still functions
 correctly. And testing software is essential for governments and businesses
-alike. In 2012, Knight Capital Group lost USD 460M (EUR 360M at the time) for a
-mistake in its trading software. With no one able to spot the error, chaos
+alike. In 2012, Knight Capital Group lost USD 460M (EUR 360M at the time) due
+to a mistake in its trading software. With no one able to spot the error, chaos
 quickly ensued: within one hour, the company went bankrupt. Today, all that is
 left is a Wikipedia entry, hardly the legacy for a group with an income of
-hundreds of millions of dollars. It has now become a prime
-[example] of why to test software.
+hundreds of millions of dollars. It has now become a prime [example] of why to
+test software.
 
 Why, then, isn't the practice more widespread? 
 
@@ -108,9 +112,9 @@ switching revenue and costs when computing the profit.
 And on the algorithm side, common issues include:
 
 - Using an algorithm unfit for the data. Statistical properties of the
-  data, such as average and median, might exclude some algorithm
+  data, such as the average and median, might exclude some algorithm
   classes.
-- Forgetting exploring if different parameters increase the model
+- Forgetting to explore if different parameters improve the model
   performance.
 
 These lists are, unfortunately, not exhaustive. Suresh and Guttag, two
@@ -185,11 +189,12 @@ ensuing babel and ensure mutual understanding when talking *data & AI*.
 
 ## Testing end-to-end
 
-An AI system usually touches multiple components: Data resides in databases,
-the code and algorithm in central repositories (specialized databases), and the
-knowledge of the data and processes around it with business stakeholders. And
-not from a single department: sales data might be used in machine learning
-models used by the finance department to allocate marketing spending better.
+An AI system usually touches upon multiple components: Data resides in
+databases, the code and algorithm in central repositories (specialized
+databases), and the knowledge of the data and processes around it with business
+stakeholders. And not from a single department: sales data might be used in
+machine learning models used by the finance department to allocate marketing
+spending better.
 
 These octopus-like systems, though, are more efficient when a single
 team tests them end-to-end without external blockers. 
@@ -201,7 +206,7 @@ top-down approach might prove more practical: if the executives sketch the
 plan, the organization will break those rigid barriers and be more fluid—
 hopefully unlike our snowman.
 
-## Win the skeptics
+## Win the skeptics over
 
 Changing the organization to ensure AI systems are safe seems daunting.
 
